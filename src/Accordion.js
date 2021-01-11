@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Data } from "./Data";
 import styled from "styled-components";
 import { IconContext } from "react-icons";
@@ -20,9 +20,36 @@ const Container = styled.div`
   box-shadow: 2px 10px 35px 1px rgba(153, 153, 153, 0.3);
 `;
 
-const Wrap = styled.div``;
+const Wrap = styled.div`
+  background: #272727;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%
+  text-align: center;
+  cursor: pointer;
+
+  h1 {
+    padding: 2rem;
+    font-size: 2rem;
+  }
+`;
+
+const Dropdown = styled.div``;
 
 const Accordion = () => {
+  const [clicked, setClicked] = useState(false);
+
+  const toggle = (index) => {
+    if (clicked === index) {
+      // If clicked question is already active, then close it.
+      return setClicked(null);
+    }
+
+    setClicked(index);
+  };
+
   return (
     <IconContext.Provider value={{ color: "#00FFB9", size: "25px" }}>
       <AccordionSection>
@@ -30,10 +57,15 @@ const Accordion = () => {
           {Data.map((item, index) => {
             return (
               <>
-                <Wrap>
+                <Wrap onClick={() => toggle(index)} key={index}>
                   <h1>{item.question}</h1>
+                  <span>{clicked === index ? <FiMinus /> : <FiPlus />}</span>
                 </Wrap>
-                <p>{item.answer}</p>
+                {clicked === index ? (
+                  <Dropdown>
+                    <p>{item.answer}</p>
+                  </Dropdown>
+                ) : null}
               </>
             );
           })}
