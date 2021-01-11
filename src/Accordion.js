@@ -34,9 +34,28 @@ const Wrap = styled.div`
     padding: 2rem;
     font-size: 2rem;
   }
+
+  span {
+    margin-right: 1.5rem;
+  }
 `;
 
-const Dropdown = styled.div``;
+const Dropdown = styled.div`
+  background: #1c1c1c;
+  color: #00ffb9;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #00ffb9;
+  border-top: 1px solid #00ffb9;
+
+  p {
+    font-size: 2rem;
+  }
+`;
 
 const Accordion = () => {
   const [clicked, setClicked] = useState(false);
